@@ -1,0 +1,20 @@
+{
+    "name": "mqttPlugin",
+    "id": "mqttPlugin",
+    "version": "1.0.1",
+    "description": "支持MQTTv5版本的uniapp mqtt原生插件",
+    "_dp_type":"nativeplugin",
+    "_dp_nativeplugin":{
+        "android": {
+            "plugins": [
+                {
+                    "type": "module",
+                    "name": "mqttPlugin",
+                    "class": "com.zechuan.mqtt.plugin.MQTTv5"
+                }
+            ],
+			"integrateType": "aar",
+			"abis": ["armeabi-v7a","arm64-v8a","x86"]
+        }
+    }
+}
