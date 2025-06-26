@@ -1,5 +1,5 @@
 import { v4 } from "uuid";
-import mqttManager from './MqttManager.js'
+
 /**
  * MQTTv5 客户端模块
  * @module mqttv5
@@ -22,9 +22,10 @@ const mqttv5={
 	config:{
 		serverURI:"tcp://120.46.54.180:1883",
 		clientId:getClientId(),
-		username:"zechuan",
+		username:"admin",
 		password:"pu200207"
 	},
+	subscriptions : new Map(), // 存储结构：{ topic => Set<{page, callback}> }
 	/**
 	 * 连接 MQTT 服务器
 	 * @param {Object} options 连接选项
@@ -56,34 +57,19 @@ const mqttv5={
 	 * @param {number} qos 服务质量等级 (0, 1 或 2)
 	 * @param {Function} callback 回调函数 (success, result)
 	 */
-	subscribe(topic, qos, callback) {
+	subscribe(topic, qos,subCallback,msgCallback) {
 	  mqttPlugin.subscribe(
 	    topic,
 	    qos,
 	    (result) => {
 	      if (result.success) {
-	        callback(true, result.message);
+	        subCallback(true, result.message);
+			if (!this.subscriptions.has(topic)) {
+			  this.subscriptions.set(topic, new Set());
+			}
+			this.subscriptions.get(topic).add({ msgCallback});
 	      } else {
-	        callback(false, result.message || 'Subscribe failed');
-	      }
-	    }
-	  );
-	},
-	/**
-	 * 订阅多个主题
-	 * @param {string[]} topics 要订阅的主题
-	 * @param {number[]} qoss 服务质量等级 (0, 1 或 2)
-	 * @param {Function} callback 回调函数 (success, result)
-	 */
-	subscribeMultiTopics(topics, qoss, callback) {
-	  mqttPlugin.subscribeMultiTopics(
-	    topics,
-	    qoss,
-	    (result) => {
-	      if (result.success) {
-	        callback(true, result.message);
-	      } else {
-	        callback(false, result.message || 'Subscribe failed');
+	        subCallback(false, result.message || 'Subscribe failed');
 	      }
 	    }
 	  );
@@ -151,8 +137,16 @@ const mqttv5={
 	  mqttPlugin.setMessageCallback((result) => {
 	    if (result.type === 'message') {
 			const message=JSON.parse(result.message);
-			message.success=true
-			mqttManager.dispatch(result.topic,message);
+			const payload={
+				topic:result.topic,
+				message:message
+			}
+			if (this.subscriptions.has(result.topic)) {
+			  const subs = this.subscriptions.get(result.topic);
+			  subs.forEach(sub => {
+				  sub.msgCallback(payload);
+			  });
+			}
 	    }
 	  });
 	},
