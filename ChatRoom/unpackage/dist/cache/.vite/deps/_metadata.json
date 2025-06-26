@@ -1,0 +1,37 @@
+{
+  "hash": "8a9a8d4c",
+  "configHash": "bc99b5a1",
+  "lockfileHash": "37c639ae",
+  "browserHash": "2a8c2b35",
+  "optimized": {
+    "mqtt/dist/mqtt.min": {
+      "src": "../../../../../node_modules/mqtt/dist/mqtt.min.js",
+      "file": "mqtt_dist_mqtt__min.js",
+      "fileHash": "9c59741b",
+      "needsInterop": true
+    },
+    "uuid": {
+      "src": "../../../../../node_modules/uuid/dist/esm-browser/index.js",
+      "file": "uuid.js",
+      "fileHash": "0a25dcbc",
+      "needsInterop": false
+    },
+    "js-cookie": {
+      "src": "../../../../../node_modules/js-cookie/dist/js.cookie.mjs",
+      "file": "js-cookie.js",
+      "fileHash": "02cd1e86",
+      "needsInterop": false
+    },
+    "mqtt/dist/mqtt": {
+      "src": "../../../../../node_modules/mqtt/dist/mqtt.js",
+      "file": "mqtt_dist_mqtt.js",
+      "fileHash": "86b57a96",
+      "needsInterop": true
+    }
+  },
+  "chunks": {
+    "chunk-TDUMLE5V": {
+      "file": "chunk-TDUMLE5V.js"
+    }
+  }
+}
