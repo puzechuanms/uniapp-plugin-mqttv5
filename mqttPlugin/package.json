@@ -1,7 +1,7 @@
 {
     "name": "mqttPlugin",
     "id": "mqttPlugin",
-    "version": "1.0.1",
+    "version": "1.0.3",
     "description": "支持MQTTv5版本的uniapp mqtt原生插件",
     "_dp_type":"nativeplugin",
     "_dp_nativeplugin":{
