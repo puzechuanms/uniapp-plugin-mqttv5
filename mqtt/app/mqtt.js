@@ -20,10 +20,10 @@ function getClientId(){
 
 const mqttv5={
 	config:{
-		serverURI:"tcp://120.46.54.180:1883",
+		serverURI:"tcp://1.1.1.1:1883",// 替换为实际的MQTT服务器地址
 		clientId:getClientId(),
-		username:"admin",
-		password:"pu200207"
+		username:"xxx", // 替换为实际的用户名
+		password:"xxx" // 替换为实际的密码
 	},
 	subscriptions : new Map(), // 存储结构：{ topic => Set<{page, callback}> }
 	/**

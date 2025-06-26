@@ -16,12 +16,12 @@ class MqttClient {
   constructor(options) {
     // 默认配置
     const defaultOptions = {
-      host: '120.46.54.180',
+      host: '1.1.1.1', // 替换为实际的MQTT服务器地址
       port: 8083, 
       endpoint: '/mqtt',
       clientId: getCleintId(),
-      username: 'zechuan',
-      password: 'pu200207',
+      username: 'xxx', // 替换为实际的用户名
+      password: 'xxx', // 替换为实际的密码
       clean: true,
       keepalive: 20,
       connectTimeout: 30 * 1000, // 30秒
